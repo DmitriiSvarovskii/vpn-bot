@@ -36,7 +36,7 @@ class XrayManager:
             raise ValueError("Метка не может быть пустой")
 
         uuid = str(uuid4())
-        label += '-fast-rabbit-vpn🇩🇪'
+        label += '-fast-rabbit-vpn'
 
         config = await self.read_config()
 
@@ -78,7 +78,7 @@ class XrayManager:
 
         config = await self.read_config()
         deleted = False
-        label += '-fast-rabbit-vpn🇩🇪'
+        label += '-fast-rabbit-vpn'
 
         for inbound in config.get("inbounds", []):
             if inbound.get("protocol") == "vless":
