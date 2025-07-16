@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./xray/config.json:/usr/local/etc/xray/config.json
+      - /usr/local/etc/xray/config.json:/usr/local/etc/xray/config.json
 
 
   db:
