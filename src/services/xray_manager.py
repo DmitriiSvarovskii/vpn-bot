@@ -15,7 +15,9 @@ class XrayManager:
         sid: str = vpn_settings.SID,
         sni: str = vpn_settings.SNI,
         domain: str = vpn_settings.DOMAIN,
-        flow: str = vpn_settings.FLOW
+        flow: str = vpn_settings.FLOW,
+        host: str = vpn_settings.IP_SERVER,
+        username: str = vpn_settings.USERNAME_SERVER
     ):
         self.config_path = Path(config_path)
         self.pbk = pbk
@@ -23,6 +25,8 @@ class XrayManager:
         self.sni = sni
         self.domain = domain
         self.flow = flow
+        self.host = host
+        self.username = username
 
     async def read_config(self) -> dict:
         with self.config_path.open("r", encoding="utf-8") as f:
@@ -102,8 +106,8 @@ class XrayManager:
     async def restart_xray(self) -> str:
         try:
             conn = await asyncssh.connect(
-                host='127.0.0.1',
-                username='root',
+                host=self.host,
+                username=self.username,
                 client_keys=[str(Path("/app/keys/xray_restart_key"))],
                 known_hosts=None
             )

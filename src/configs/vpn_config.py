@@ -8,6 +8,8 @@ class VPNSettings(BaseConfig):
     SNI: str
     DOMAIN: str
     FLOW: str
+    IP_SERVER: str
+    USERNAME_SERVER: str
 
 
 vpn_settings = VPNSettings()
