@@ -51,6 +51,7 @@ async def process_in_development_action(
                 parse_mode=ParseMode.HTML,
                 reply_markup=await start_kb.create_start_kb()
             )
+            await xray.restart_xray()
         except ValueError as e:
             logger.warning(
                 f"❌ Попытка повторной выдачи ключа для {telegram_id}: {str(e)}")
@@ -59,6 +60,11 @@ async def process_in_development_action(
                 show_alert=True
             )
         except Exception as e:
+            await callback.answer(
+                text=presale_text.text_dict['text_error_key'],
+                show_alert=True
+            )
+
             logger.exception(
                 f"⚠️ Неизвестная ошибка при создании ключа для {telegram_id}")
     except TelegramBadRequest as e:
