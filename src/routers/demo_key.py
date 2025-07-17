@@ -1,5 +1,6 @@
 import logging
 from aiogram import Router, types, F
+from aiogram.filters import Command
 from aiogram.enums import ParseMode
 from aiogram.exceptions import TelegramBadRequest
 
@@ -72,3 +73,12 @@ async def process_in_development_action(
             f"🚨 Общая ошибка при обработке demo-key для {telegram_id}")
     finally:
         await callback.answer()
+
+
+@router.message(Command("reboot"))
+async def process_in1_development_action(
+    message: types.Message,
+):
+    xray = XrayManager()
+    xray.restart_xray()
+    await message.answer("Xray перезапущен")
