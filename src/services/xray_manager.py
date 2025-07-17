@@ -112,7 +112,7 @@ class XrayManager:
                 known_hosts=None
             )
             result = await conn.run('systemctl restart xray', check=True)
-            await conn.close()
+            conn.close()
             return result.stdout.strip()
         except asyncssh.Error as e:
             raise RuntimeError(f"Ошибка при перезапуске Xray: {e}")
