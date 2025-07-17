@@ -80,5 +80,5 @@ async def process_in1_development_action(
     message: types.Message,
 ):
     xray = XrayManager()
-    xray.restart_xray()
+    await xray.restart_xray()
     await message.answer("Xray перезапущен")
