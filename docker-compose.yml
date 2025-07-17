@@ -11,6 +11,8 @@ services:
       - "8000:8000"
     volumes:
       - /usr/local/etc/xray/config.json:/usr/local/etc/xray/config.json
+      - /root/.ssh/xray_restart_key:/app/keys/xray_restart_key:ro
+
 
 
   db:

@@ -1,4 +1,5 @@
 import json
+import asyncssh
 
 from uuid import uuid4
 from pathlib import Path
@@ -97,3 +98,17 @@ class XrayManager:
 
         await self.write_config(config)
         return True
+
+    async def restart_xray(self) -> str:
+        try:
+            conn = await asyncssh.connect(
+                host='127.0.0.1',
+                username='root',
+                client_keys=[str(Path("/app/keys/xray_restart_key"))],
+                known_hosts=None
+            )
+            result = await conn.run('systemctl restart xray', check=True)
+            await conn.close()
+            return result.stdout.strip()
+        except asyncssh.Error as e:
+            raise RuntimeError(f"Ошибка при перезапуске Xray: {e}")
