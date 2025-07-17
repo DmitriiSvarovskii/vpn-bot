@@ -3,6 +3,7 @@ FROM python:3.13.0-slim
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
+    openssh-client \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
